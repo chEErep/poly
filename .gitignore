@@ -23,3 +23,28 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Additional CMake and Ninja output
+build-*/
+CMakeFiles/
+CMakeCache.txt
+CTestTestfile.cmake
+cmake_install.cmake
+build.ninja
+.ninja_*
+
+# Generated temporary files
+tmp/
+
+# VirtualBox virtual machines
+VM-*/
+*.vdi
+*.vbox
+*.vbox-prev
+*.viso
+VBox.log
+VBoxHardening.log
+
+# Windows crash and debug files
+*.dmp
+*.pdb
