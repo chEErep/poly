@@ -1,0 +1,25 @@
+# C / C++
+*.o
+*.obj
+*.exe
+*.out
+
+# Build
+build/
+cmake-build-*/
+
+# IDE
+.idea/
+.vs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Secrets
+.env
+
+# OS
+.DS_Store
+Thumbs.db
