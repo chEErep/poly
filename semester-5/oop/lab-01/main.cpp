@@ -2,10 +2,20 @@
 #include "MyString.h"
 
 int main() {
-    MyString empty;
-    empty.insert(0, 1, '!');
-    std::cout << empty.c_str() << ' '
-              << empty.size() << ' '
-              << empty.capacity() << '\n';
+    MyString a("abc");
+    a.insert(1, "XY");
+    std::cout << a.c_str() << '\n';  // aXYbc
+
+    MyString b("abc");
+    b.insert(1, std::string("XY"));
+    std::cout << b.c_str() << '\n';  // aXYbc
+
+    MyString c("abc");
+    c.insert(1, MyString("XY"));
+    std::cout << c.c_str() << '\n';  // aXYbc
+
+    MyString self("ab");
+    self.insert(1, self);
+    std::cout << self.c_str() << '\n';  // aabb
     return 0;
 }

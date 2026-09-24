@@ -31,11 +31,16 @@ public:
     MyString& operator=(const std::string& source);
 
     void insert(int index, int count, char ch);
+
+    void insert(int index, const char*source);
+    void insert(int index, const std::string& source);
+    void insert(int index, const MyString& source);
 private:
     char* data_;
     int size_;
     int capacity_;
     void swap(MyString& other);
+    void insert_chars(int index, const char* source, int count);
 };
 
 #endif

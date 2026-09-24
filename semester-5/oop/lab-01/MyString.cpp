@@ -171,37 +171,64 @@ MyString &MyString::operator=(const std::string &source) {
 }
 
 void MyString::insert(int index, int count, char ch) {
-    if (index <0 || index > size_) {
-        throw std::out_of_range("index is out of range");
+    MyString repeated(count,ch);
+    insert_chars(index,repeated.c_str(),count);
+}
+void MyString::insert_chars(int index, const char *source, int count) {
+    if (index < 0 || index > size_) {
+        throw std::out_of_range("invalid index");
     }
-    if (count < 0) {
-        throw std::invalid_argument("count is negative");
+    if (count < 0 || (count > 0 && source == nullptr)) {
+        throw std::invalid_argument("invalid source or count");
     }
     if (count == 0) {
         return;
     }
-    if (count>std::numeric_limits<int>::max()-1-size_) {
+    if (count > std::numeric_limits<int>::max() - 1 - size_) {
         throw std::length_error("string is too long");
     }
-    int new_size=size_+count;
-    int new_capacity=capacity_;
-    if (new_capacity<new_size+1) {
-        new_capacity=new_size+1;
-    }
-    char* new_data = new char[new_capacity];
-    const char* old_data=c_str();
 
-    for (int i=0; i < index;++i) {
-        new_data[i]=old_data[i];
+    int new_size = size_ + count;
+    int new_capacity = capacity_;
+    if (new_capacity < new_size + 1) {
+        new_capacity = new_size + 1;
     }
-    for (int i=0;i<count; ++i) {
-        new_data[index+i]=ch;
+
+    char* new_data = new char[new_capacity];
+    const char* old_data = c_str();
+
+    for (int i = 0; i < index; ++i) {
+        new_data[i] = old_data[i];
     }
-    for (int i=index; i<=size_; ++i) {
-        new_data[i+count]=old_data[i];
+    for (int i = 0; i < count; ++i) {
+        new_data[index + i] = source[i];
     }
+    for (int i = index; i <= size_; ++i) {
+        new_data[i + count] = old_data[i];
+    }
+
     delete[] data_;
-    data_=new_data;
-    size_=new_size;
-    capacity_=new_capacity;
+    data_ = new_data;
+    size_ = new_size;
+    capacity_ = new_capacity;
+}
+
+void MyString::insert(int index, const char *source) {
+    if (source == nullptr) {
+        throw std::invalid_argument("source is null");
+    }
+    std::size_t length = std::strlen(source);
+    if (length > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+        throw std::length_error("string is too long");
+    }
+    insert_chars(index, source, static_cast<int>(length));
+}
+void MyString::insert(int index, const std::string &source) {
+    if (source.size() > static_cast<std::size_t>(std::numeric_limits<int>::max())) {
+        throw std::length_error("string is too long");
+    }
+    insert_chars(index, source.data(), static_cast<int>(source.size()));
+}
+void MyString::insert(int index, const MyString &source) {
+    insert_chars(index, source.c_str(), source.size());
 }
