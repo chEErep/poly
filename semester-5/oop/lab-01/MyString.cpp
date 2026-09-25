@@ -401,3 +401,116 @@ void MyString::replace(int index, int count, const std::string& source, int s_in
 void MyString::replace(int index, int count, const MyString& source, int s_index, int s_count) {
     replace(index, count, source.c_str(), s_index, s_count);
 }
+
+MyString MyString::substr(int index) const {
+    if (index < 0 || index > size_) {
+        throw std::out_of_range("invalid index");
+    }
+    return substr(index, size_ - index);
+}
+
+MyString MyString::substr(int index, int count) const {
+    if (index < 0 || index > size_) {
+        throw std::out_of_range("invalid index");
+    }
+    return MyString(c_str() + index, count);
+}
+
+MyString MyString::operator+(const char* source) const {
+    MyString result(*this);
+    result.append(source);
+    return result;
+}
+
+MyString MyString::operator+(const std::string& source) const {
+    MyString result(*this);
+    result.append(source);
+    return result;
+}
+
+MyString MyString::operator+(const MyString& source) const {
+    MyString result(*this);
+    result.append(source);
+    return result;
+}
+
+MyString& MyString::operator+=(const char* source) {
+    append(source);
+    return *this;
+}
+
+MyString& MyString::operator+=(const std::string& source) {
+    append(source);
+    return *this;
+}
+
+MyString& MyString::operator+=(const MyString& source) {
+    append(source);
+    return *this;
+}
+
+void MyString::check_index(int index) const {
+    if (index < 0 || index >= size_) {
+        throw std::out_of_range("invalid index");
+    }
+}
+
+char& MyString::operator[](int index) {
+    check_index(index);
+    return data_[index];
+}
+
+const char& MyString::operator[](int index) const {
+    check_index(index);
+    return data_[index];
+}
+
+int MyString::compare(const MyString& other) const {
+    int common_size = size_;
+    if (other.size_ < common_size) {
+        common_size = other.size_;
+    }
+    for (int i=0; i<common_size; ++i) {
+        unsigned char left = static_cast<unsigned char>((*this)[i]);
+        unsigned char right = static_cast<unsigned char>(other[i]);
+
+        if (left < right) {
+            return -1;
+        }
+        if (left > right) {
+            return 1;
+        }
+    }
+
+    if (size_ < other.size_ ) {
+        return -1;
+    }
+    if (size_ > other.size_) {
+        return 1;
+    }
+    return 0;
+}
+
+bool MyString::operator==(const MyString& other) const {
+    return compare(other) == 0;
+}
+
+bool MyString::operator!=(const MyString& other) const {
+    return compare(other) != 0;
+}
+
+bool MyString::operator<(const MyString& other) const {
+    return compare(other) < 0;
+}
+
+bool MyString::operator<=(const MyString& other) const {
+    return compare(other) <= 0;
+}
+
+bool MyString::operator>(const MyString& other) const {
+    return compare(other) > 0;
+}
+
+bool MyString::operator>=(const MyString& other) const {
+    return compare(other) >= 0;
+}

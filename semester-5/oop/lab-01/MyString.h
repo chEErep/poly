@@ -68,6 +68,29 @@ public:
     void replace(int index, int count, const char* source, int s_index, int s_count);
     void replace(int index, int count, const std::string& source, int s_index, int s_count);
     void replace(int index, int count, const MyString& source, int s_index, int s_count);
+
+    MyString substr(int index) const;
+    MyString substr(int index, int count) const;
+
+    MyString operator+(const char* source) const;
+    MyString operator+(const std::string& source) const;
+    MyString operator+(const MyString& source) const;
+
+    MyString& operator+=(const char* source);
+    MyString& operator+=(const std::string& source);
+    MyString& operator+=(const MyString& source);
+
+    char& operator[](int index);
+    const char& operator[](int index) const;
+
+    int compare(const MyString& other) const;
+
+    bool operator==(const MyString& other) const;
+    bool operator!=(const MyString& other) const;
+    bool operator<(const MyString& other) const;
+    bool operator<=(const MyString& other) const;
+    bool operator>(const MyString& other) const;
+    bool operator>=(const MyString& other) const;
 private:
     char* data_;
     int size_;
@@ -78,6 +101,8 @@ private:
     void insert_prefix(int index, const char* source, int count, std::size_t available);
 
     void insert_slice(int index, const char* source, std::size_t length, int s_index, int count);
+
+    void check_index(int index) const;
 };
 
 #endif
