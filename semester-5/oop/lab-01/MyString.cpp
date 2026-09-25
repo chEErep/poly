@@ -1,7 +1,6 @@
 #include "MyString.h"
 #include <cstddef>
 #include <cstring>
-#include <iterator>
 #include <limits>
 #include <stdexcept>
 
@@ -513,4 +512,72 @@ bool MyString::operator>(const MyString& other) const {
 
 bool MyString::operator>=(const MyString& other) const {
     return compare(other) >= 0;
+}
+
+int MyString::find_chars(const char* source,
+                         std::size_t length, int start) const {
+    if (start < 0 || start > size_) {
+        throw std::out_of_range("invalid start index");
+    }
+    if (source == nullptr) {
+        throw std::invalid_argument("source is null");
+    }
+    if (length == 0) {
+        return start;
+    }
+
+    std::size_t available = static_cast<std::size_t>(size_ - start);
+    if (length > available) {
+        return -1;
+    }
+
+    const char* text = c_str();
+
+    for (std::size_t i = static_cast<std::size_t>(start);
+         i + length <= static_cast<std::size_t>(size_);
+         ++i) {
+        bool same = true;
+
+        for (std::size_t j = 0; j < length; ++j) {
+            if (text[i + j] != source[j]) {
+                same = false;
+                break;
+            }
+        }
+
+        if (same) {
+            return static_cast<int>(i);
+        }
+         }
+
+    return -1;
+}
+
+
+int MyString::find(const char* source) const {
+    return find(source, 0);
+}
+
+int MyString::find(const std::string& source) const {
+    return find(source, 0);
+}
+
+int MyString::find(const MyString& source) const {
+    return find(source, 0);
+}
+
+int MyString::find(const char* source, int index) const {
+    if (source == nullptr) {
+        throw std::invalid_argument("source is null");
+    }
+    return find_chars(source, std::strlen(source), index);
+}
+
+int MyString::find(const std::string& source, int index) const {
+    return find_chars(source.data(), source.size(), index);
+}
+
+int MyString::find(const MyString& source, int index) const {
+    return find_chars(source.c_str(),
+                      static_cast<std::size_t>(source.size()), index);
 }

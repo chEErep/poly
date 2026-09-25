@@ -91,6 +91,14 @@ public:
     bool operator<=(const MyString& other) const;
     bool operator>(const MyString& other) const;
     bool operator>=(const MyString& other) const;
+
+    int find(const char* source) const;
+    int find(const std::string& source) const;
+    int find(const MyString& source) const;
+    int find(const char* source, int index) const;
+    int find(const std::string& source, int index) const;
+    int find(const MyString& source, int index) const;
+
 private:
     char* data_;
     int size_;
@@ -103,6 +111,8 @@ private:
     void insert_slice(int index, const char* source, std::size_t length, int s_index, int count);
 
     void check_index(int index) const;
+
+    int find_chars(const char* source, std::size_t length, int start) const;
 };
 
 #endif
