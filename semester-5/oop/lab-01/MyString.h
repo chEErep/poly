@@ -57,6 +57,17 @@ public:
     void append(const MyString& source, int s_index, int count);
 
     void erase (int index, int count);
+
+    void replace(int index, int count, const char* source);
+    void replace(int index, int count, const std::string& source);
+    void replace(int index, int count, const MyString& source);
+    void replace(int index, int count, const char* source, int s_count);
+    void replace(int index, int count, const std::string& source, int s_count);
+    void replace(int index, int count, const MyString& source, int s_count);
+
+    void replace(int index, int count, const char* source, int s_index, int s_count);
+    void replace(int index, int count, const std::string& source, int s_index, int s_count);
+    void replace(int index, int count, const MyString& source, int s_index, int s_count);
 private:
     char* data_;
     int size_;

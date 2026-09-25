@@ -354,3 +354,50 @@ void MyString::erase (int index, int count) {
     }
     size_ -= count;
 }
+
+void MyString::replace(int index, int count, const char* source) {
+    if (index < 0 || index > size_) {
+        throw std::out_of_range("invalid index");
+    }
+    if (count < 0) {
+        throw std::invalid_argument("negative count");
+    }
+
+    MyString replacement(source);
+    erase(index, count);
+    insert(index, replacement);
+}
+void MyString::replace(int index, int count, const std::string& source) {
+    replace(index, count, source.c_str());
+}
+
+void MyString::replace(int index, int count, const MyString& source) {
+    replace(index, count, source.c_str());
+}
+
+void MyString::replace(int index, int count,
+                       const char* source, int s_count) {
+    MyString replacement(source, s_count);
+    replace(index, count, replacement.c_str());
+}
+void MyString::replace(int index, int count, const std::string& source, int s_count) {
+    replace(index, count, source.c_str(), s_count);
+}
+
+void MyString::replace(int index, int count, const MyString& source, int s_count) {
+    replace(index, count, source.c_str(), s_count);
+}
+
+void MyString::replace(int index, int count, const char* source,
+                       int s_index, int s_count) {
+    MyString fragment;
+    fragment.append(source, s_index, s_count);
+    replace(index, count, fragment.c_str());
+}
+void MyString::replace(int index, int count, const std::string& source, int s_index, int s_count) {
+    replace(index, count, source.c_str(), s_index, s_count);
+}
+
+void MyString::replace(int index, int count, const MyString& source, int s_index, int s_count) {
+    replace(index, count, source.c_str(), s_index, s_count);
+}
