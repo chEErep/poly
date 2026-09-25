@@ -4,14 +4,17 @@
 #include <limits>
 #include <stdexcept>
 
+// 1
 MyString::MyString() : data_(nullptr), size_(0),
                        capacity_(0) {
 }
 
+// 4
 MyString::MyString(const MyString& other)
     : MyString(other.c_str()){
     }
 
+// 2
 MyString::MyString(const char *source) : MyString() {
     if (source == nullptr) {
         throw std::invalid_argument("source is null");
@@ -30,14 +33,17 @@ MyString::MyString(const char *source) : MyString() {
     data_[size_] = '\0';
 }
 
+// 9
 MyString::~MyString() {
     delete[] data_;
 }
 
+// 15
 int MyString::size() const {
     return size_;
 }
 
+// 14
 const char* MyString::c_str() const {
     if (data_ == nullptr) {
         return "";
@@ -45,14 +51,17 @@ const char* MyString::c_str() const {
     return data_;
     }
 
+// 16
 int MyString::capacity() const {
     return capacity_;
 }
 
+// 17
 bool MyString::empty() const {
     return size_ == 0;
 }
 
+// 10
 void MyString::clear() {
     size_=0;
     if (data_ != nullptr) {
@@ -60,6 +69,7 @@ void MyString::clear() {
     }
 }
 
+// Helper: swap object state
 void MyString::swap(MyString& other) {
     char* old_data=data_;
     data_=other.data_;
@@ -73,16 +83,19 @@ void MyString::swap(MyString& other) {
     capacity_=other.capacity_;
     other.capacity_=old_capacity;
 }
+// 12 (const char* source)
 MyString &MyString::operator=(const char *source) {
     MyString temp(source);
     swap(temp);
     return *this;
 }
 
+// 12 (MyString source)
 MyString& MyString::operator=(const MyString& other) {
     return *this = other.c_str();
 }
 
+// 8
 MyString::MyString(int count, char ch): MyString() {
     if (count <0) {
         throw std::invalid_argument("count is negative");
@@ -104,11 +117,13 @@ MyString::MyString(int count, char ch): MyString() {
     data_[size_]='\0';
 }
 
+// 13
 MyString& MyString::operator=(char ch) {
     char source[2]= {ch, '\0'};
     return *this = source;
 }
 
+// 11
 void MyString::shrink_to_fit() {
     if (size_==0) {
         delete[] data_;
@@ -128,10 +143,12 @@ void MyString::shrink_to_fit() {
     capacity_=size_+1;
 }
 
+// 3
 MyString::MyString(const std::string& source)
     : MyString(source.c_str()) {
 }
 
+// 5
 MyString::MyString(const char *source, int count) :MyString() {
     if (source == nullptr) {
         throw std::invalid_argument("source is null");
@@ -158,21 +175,26 @@ MyString::MyString(const char *source, int count) :MyString() {
     data_[count]='\0';
 }
 
+// 6
 MyString::MyString(const std::string& source, int count)
     :MyString(source.c_str(),count){
 }
+// 7
 MyString::MyString(const MyString &source, int count)
     :MyString(source.c_str(), count){
 }
 
+// 12 (std::string source)
 MyString &MyString::operator=(const std::string &source) {
     return *this = source.c_str();
 }
 
+// 18
 void MyString::insert(int index, int count, char ch) {
     MyString repeated(count,ch);
     insert_chars(index,repeated.c_str(),count);
 }
+// Helper: insert characters into the buffer
 void MyString::insert_chars(int index, const char *source, int count) {
     if (index < 0 || index > size_) {
         throw std::out_of_range("invalid index");
@@ -212,6 +234,7 @@ void MyString::insert_chars(int index, const char *source, int count) {
     capacity_ = new_capacity;
 }
 
+// 19-21
 void MyString::insert(int index, const char *source) {
     if (source == nullptr) {
         throw std::invalid_argument("source is null");
@@ -232,6 +255,7 @@ void MyString::insert(int index, const MyString &source) {
     insert_chars(index, source.c_str(), source.size());
 }
 
+// Helper: limit the inserted prefix
 void MyString::insert_prefix(int index, const char* source,
                              int count, std::size_t available) {
     if (source == nullptr) {
@@ -247,6 +271,7 @@ void MyString::insert_prefix(int index, const char* source,
     insert_chars(index, source, count);
 }
 
+// 22-24
 void MyString::insert(int index, const char* source, int count) {
     if (source == nullptr) {
         throw std::invalid_argument("source is null");
@@ -264,6 +289,7 @@ void MyString::insert(int index, const MyString& source, int count) {
 }
 
 
+// Helper: select a source slice
 void MyString::insert_slice(int index, const char *source, std::size_t length, int s_index, int count) {
     if (source == nullptr) {
         throw std::invalid_argument("source is null");
@@ -275,6 +301,7 @@ void MyString::insert_slice(int index, const char *source, std::size_t length, i
     insert_prefix(index, source+start,count, length-start);
 }
 
+// 25-27
 void MyString::insert(int index, const char* source,
                       int s_index, int count) {
     if (source == nullptr) {
@@ -294,10 +321,12 @@ void MyString::insert(int index, const MyString& source,
                  static_cast<std::size_t>(source.size()), s_index, count);
 }
 
+// 28
 void MyString::append(int count, char ch) {
     insert(size_,count,ch);
 }
 
+// 29-31
 void MyString::append(const char *source) {
     insert(size_,source);
 }
@@ -310,6 +339,7 @@ void MyString::append(const MyString& source) {
     insert(size_, source);
 }
 
+// 32-34
 void MyString::append(const char* source, int count) {
     insert(size_, source, count);
 }
@@ -322,6 +352,7 @@ void MyString::append(const MyString& source, int count) {
     insert(size_, source, count);
 }
 
+// 35-37
 void MyString::append(const char* source, int s_index, int count) {
     insert(size_, source, s_index, count);
 }
@@ -333,6 +364,7 @@ void MyString::append(const MyString& source, int s_index, int count) {
     insert(size_, source, s_index, count);
 }
 
+// 38
 void MyString::erase (int index, int count) {
     if (index < 0 || index >size_) {
         throw std::out_of_range("invalid index");
@@ -340,20 +372,21 @@ void MyString::erase (int index, int count) {
     if (count < 0) {
         throw std::invalid_argument("negative count");
     }
-//Если попросили удалить больше, чем осталось, уменьшаем count до доступного количества
+// Clamp count to the number of remaining characters.
     if (count > size_ - index) {
         count = size_ - index;
     }
     if (count ==0) {
         return;
     }
-    //идем слева направо, читаем из ячейки справа и записываем в ячейку слева
+    // Shift the suffix left, including the terminating null character.
     for (int i=index; i+count <=size_;++i) {
         data_[i]=data_[i+count];
     }
     size_ -= count;
 }
 
+// 39-41
 void MyString::replace(int index, int count, const char* source) {
     if (index < 0 || index > size_) {
         throw std::out_of_range("invalid index");
@@ -374,6 +407,7 @@ void MyString::replace(int index, int count, const MyString& source) {
     replace(index, count, source.c_str());
 }
 
+// 42-44
 void MyString::replace(int index, int count,
                        const char* source, int s_count) {
     MyString replacement(source, s_count);
@@ -387,6 +421,7 @@ void MyString::replace(int index, int count, const MyString& source, int s_count
     replace(index, count, source.c_str(), s_count);
 }
 
+// 45-47
 void MyString::replace(int index, int count, const char* source,
                        int s_index, int s_count) {
     MyString fragment;
@@ -401,6 +436,7 @@ void MyString::replace(int index, int count, const MyString& source, int s_index
     replace(index, count, source.c_str(), s_index, s_count);
 }
 
+// 48
 MyString MyString::substr(int index) const {
     if (index < 0 || index > size_) {
         throw std::out_of_range("invalid index");
@@ -408,6 +444,7 @@ MyString MyString::substr(int index) const {
     return substr(index, size_ - index);
 }
 
+// 49
 MyString MyString::substr(int index, int count) const {
     if (index < 0 || index > size_) {
         throw std::out_of_range("invalid index");
@@ -415,6 +452,7 @@ MyString MyString::substr(int index, int count) const {
     return MyString(c_str() + index, count);
 }
 
+// 50-52
 MyString MyString::operator+(const char* source) const {
     MyString result(*this);
     result.append(source);
@@ -433,6 +471,7 @@ MyString MyString::operator+(const MyString& source) const {
     return result;
 }
 
+// 53-55
 MyString& MyString::operator+=(const char* source) {
     append(source);
     return *this;
@@ -448,12 +487,14 @@ MyString& MyString::operator+=(const MyString& source) {
     return *this;
 }
 
+// Helper: validate an element index
 void MyString::check_index(int index) const {
     if (index < 0 || index >= size_) {
         throw std::out_of_range("invalid index");
     }
 }
 
+// 56
 char& MyString::operator[](int index) {
     check_index(index);
     return data_[index];
@@ -464,6 +505,7 @@ const char& MyString::operator[](int index) const {
     return data_[index];
 }
 
+// 57
 int MyString::compare(const MyString& other) const {
     int common_size = size_;
     if (other.size_ < common_size) {
@@ -490,6 +532,7 @@ int MyString::compare(const MyString& other) const {
     return 0;
 }
 
+// 58-60 (six comparison operators in Table 1)
 bool MyString::operator==(const MyString& other) const {
     return compare(other) == 0;
 }
@@ -514,6 +557,7 @@ bool MyString::operator>=(const MyString& other) const {
     return compare(other) >= 0;
 }
 
+// Helper: search for a character sequence
 int MyString::find_chars(const char* source,
                          std::size_t length, int start) const {
     if (start < 0 || start > size_) {
@@ -554,6 +598,7 @@ int MyString::find_chars(const char* source,
 }
 
 
+// 61-63
 int MyString::find(const char* source) const {
     return find(source, 0);
 }
@@ -566,6 +611,7 @@ int MyString::find(const MyString& source) const {
     return find(source, 0);
 }
 
+// 64-66
 int MyString::find(const char* source, int index) const {
     if (source == nullptr) {
         throw std::invalid_argument("source is null");
