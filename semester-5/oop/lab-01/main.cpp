@@ -2,20 +2,14 @@
 #include "MyString.h"
 
 int main() {
-    MyString a("abc");
-    a.insert(1, "XY");
-    std::cout << a.c_str() << '\n';  // aXYbc
+    MyString a("xy");
+    a.append(std::string("ABCDE"), 1, 2);  // добавит "BC"
+    MyString source("12345");
+    a.append(source, 2, 2);                // добавит "34"
+    std::cout << a.c_str() << ' ' << a.size() << ' ' << a.capacity() << '\n';
 
-    MyString b("abc");
-    b.insert(1, std::string("XY"));
-    std::cout << b.c_str() << '\n';  // aXYbc
-
-    MyString c("abc");
-    c.insert(1, MyString("XY"));
-    std::cout << c.c_str() << '\n';  // aXYbc
-
-    MyString self("ab");
-    self.insert(1, self);
-    std::cout << self.c_str() << '\n';  // aabb
+    MyString b("Hello world!");
+    b.erase(5, 6);
+    std::cout << b.c_str() << ' ' << b.size() << ' ' << b.capacity() << '\n';
     return 0;
 }

@@ -232,3 +232,125 @@ void MyString::insert(int index, const std::string &source) {
 void MyString::insert(int index, const MyString &source) {
     insert_chars(index, source.c_str(), source.size());
 }
+
+void MyString::insert_prefix(int index, const char* source,
+                             int count, std::size_t available) {
+    if (source == nullptr) {
+        throw std::invalid_argument("source is null");
+    }
+    if (count < 0) {
+        throw std::invalid_argument("negative count");
+    }
+    if (static_cast<std::size_t>(count) > available) {
+        count = static_cast<int>(available);
+    }
+
+    insert_chars(index, source, count);
+}
+
+void MyString::insert(int index, const char* source, int count) {
+    if (source == nullptr) {
+        throw std::invalid_argument("source is null");
+    }
+    insert_prefix(index, source, count, std::strlen(source));
+}
+
+void MyString::insert(int index, const std::string& source, int count) {
+    insert_prefix(index, source.data(), count, source.size());
+}
+
+void MyString::insert(int index, const MyString& source, int count) {
+    insert_prefix(index, source.c_str(), count,
+                  static_cast<std::size_t>(source.size()));
+}
+
+
+void MyString::insert_slice(int index, const char *source, std::size_t length, int s_index, int count) {
+    if (source == nullptr) {
+        throw std::invalid_argument("source is null");
+    }
+    if (s_index < 0 || static_cast<std::size_t>(s_index) > length) {
+        throw std::out_of_range("invalid source index");
+    }
+    std::size_t start = static_cast<std::size_t>(s_index);
+    insert_prefix(index, source+start,count, length-start);
+}
+
+void MyString::insert(int index, const char* source,
+                      int s_index, int count) {
+    if (source == nullptr) {
+        throw std::invalid_argument("source is null");
+    }
+    insert_slice(index, source, std::strlen(source), s_index, count);
+}
+
+void MyString::insert(int index, const std::string& source,
+                      int s_index, int count) {
+    insert_slice(index, source.data(), source.size(), s_index, count);
+}
+
+void MyString::insert(int index, const MyString& source,
+                      int s_index, int count) {
+    insert_slice(index, source.c_str(),
+                 static_cast<std::size_t>(source.size()), s_index, count);
+}
+
+void MyString::append(int count, char ch) {
+    insert(size_,count,ch);
+}
+
+void MyString::append(const char *source) {
+    insert(size_,source);
+}
+
+void MyString::append(const std::string& source) {
+    insert(size_, source);
+}
+
+void MyString::append(const MyString& source) {
+    insert(size_, source);
+}
+
+void MyString::append(const char* source, int count) {
+    insert(size_, source, count);
+}
+
+void MyString::append(const std::string& source, int count) {
+    insert(size_, source, count);
+}
+
+void MyString::append(const MyString& source, int count) {
+    insert(size_, source, count);
+}
+
+void MyString::append(const char* source, int s_index, int count) {
+    insert(size_, source, s_index, count);
+}
+void MyString::append(const std::string& source, int s_index, int count) {
+    insert(size_, source, s_index, count);
+}
+
+void MyString::append(const MyString& source, int s_index, int count) {
+    insert(size_, source, s_index, count);
+}
+
+void MyString::erase (int index, int count) {
+    if (index < 0 || index >size_) {
+        throw std::out_of_range("invalid index");
+    }
+    if (count < 0) {
+        throw std::invalid_argument("negative count");
+    }
+//Если попросили удалить больше, чем осталось, уменьшаем count до доступного количества
+    if (count > size_ - index) {
+        count = size_ - index;
+    }
+    if (count ==0) {
+        return;
+    }
+    //идем слева направо, читаем из ячейки справа и записываем в ячейку слева
+    for (int i=index; i+count <=size_;++i) {
+        data_[i]=data_[i+count];
+    }
+    size_ -= count;
+}
