@@ -1,9 +1,10 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.venv/
+.idea/
 
 # Локальные артефакты: не публиковать отчёт и результаты запусков.
 report/
 results/
-make_report.py
-requirements.txt
+report-support/
