@@ -29,7 +29,6 @@
 | [CMakeLists.txt](CMakeLists.txt) | Сборка программы и необязательной обёртки |
 | [MyString_decomposition.drawio](MyString_decomposition.drawio) | Схема алгоритмической декомпозиции |
 | [graphs/](graphs/) | Графы фактических вызовов: DOT, SVG и draw.io |
-| [report/lab-01-report.docx](report/lab-01-report.docx) | Отчёт по лабораторной работе |
 | [report/defense-guide.md](report/defense-guide.md) | Теория, разбор кода и подготовка к защите |
 | [materials/](materials/) | Методичка, правила оформления и архивы курса |
 | [mystring_h_path.txt](mystring_h_path.txt) | Путь к заголовку для учебной проверяющей системы |
