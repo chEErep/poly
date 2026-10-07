@@ -22,7 +22,13 @@ static int test_round_trip(void)
         return 0;
     }
 
-    return memcmp(&original, &decoded, sizeof(original)) == 0;
+    return original.version == decoded.version
+        && original.kind == decoded.kind
+        && original.type == decoded.type
+        && original.request_id == decoded.request_id
+        && original.flags == decoded.flags
+        && original.payload_len == decoded.payload_len
+        && original.reserved == decoded.reserved;
 }
 
 static int test_bad_magic(void)

@@ -6,21 +6,31 @@
 #include <ws2tcpip.h>
 #include <windows.h>
 
+#include <aclapi.h> //нужен для получения владельца
+#include <sddl.h> //нужен для перевода sid в строку
+
 #include "protocol.h"
 #include "system_info.h"
 
+#include "crypto.h"
+// В каждом соединении одновременно ожидается не более одной операции I/O
 typedef enum io_operation {
     IO_OPERATION_RECV,
     IO_OPERATION_SEND
 } io_operation;
 
+// TCP может разрезать сообщение. Сначала собираем 24 байта заголовка,
+// затем payload_len байтов тела; это два состояния приёма
 typedef enum receive_stage {
     RECEIVE_HEADER,
     RECEIVE_PAYLOAD
 } receive_stage;
 
+// Всё состояние одного клиента. OVERLAPPED и сетевые буферы живут здесь,
+// пока выполняется асинхронная операция WSARecv/WSASend
 typedef struct connection {
     SOCKET socket;
+    lab_crypto_context crypto;
     OVERLAPPED overlapped;
     WSABUF wsabuf;
     io_operation operation;
@@ -36,8 +46,10 @@ typedef struct connection {
     char peer[64];
 } connection;
 
+// Общая очередь завершённых операций для worker threads
 static HANDLE completion_port = NULL;
 
+// Вызывается, когда у клиента больше нет незавершённой операции I/O
 static void close_connection(connection *client, const char *reason)
 {
     if (client == NULL) {
@@ -46,9 +58,12 @@ static void close_connection(connection *client, const char *reason)
 
     printf("[disconnect] peer=%s reason=%s\n", client->peer, reason);
     closesocket(client->socket);
+    lab_crypto_close(&client->crypto);
     free(client);
 }
 
+// Запускает асинхронный приём недостающей части заголовка или тела
+// WSA_IO_PENDING означает не ошибку, а "операция ещё выполняется"
 static int post_receive(connection *client)
 {
     DWORD flags = 0;
@@ -79,6 +94,7 @@ static int post_receive(connection *client)
     return 1;
 }
 
+// Запускает отправку той части ответа, которую ещё не отправили
 static int post_send(connection *client)
 {
     int result;
@@ -100,44 +116,174 @@ static int post_send(connection *client)
     }
     return 1;
 }
-
-static int prepare_response(connection *client)
+// Отвечаем на служебный запрос бинарным BLOB, а не текстовой строкой
+static int prepare_key_exchange_response(connection *client)
 {
     lab_header response;
-    char response_text[LAB_MAX_PAYLOAD];
-    size_t response_length;
-    int is_error;
+    DWORD wrapped_length = LAB_MAX_KEY_BLOB;
 
-    lab_build_system_response(client->request.type,
-                              response_text,
-                              sizeof(response_text),
-                              &is_error);
-    response_length = strlen(response_text);
+    if (client->crypto.provider != 0
+        || client->request.payload_len < 20
+        || client->request.payload_len > LAB_MAX_KEY_BLOB
+        || client->request.flags != 0
+        || client->payload[0] != PUBLICKEYBLOB) {
+        return 0;
+        }
+
+    if (!lab_crypto_open(&client->crypto)
+        || !lab_crypto_create_session_key(
+               &client->crypto,
+               client->payload,
+               client->request.payload_len,
+               client->send_buffer + LAB_HEADER_SIZE,
+               &wrapped_length)) {
+        fprintf(stderr, "[key exchange] peer=%s error=%lu\n",
+                client->peer, (unsigned long)GetLastError());
+        return 0;
+               }
 
     response.version = LAB_PROTOCOL_VERSION;
-    response.kind = (uint8_t)(is_error ? LAB_KIND_ERROR : LAB_KIND_RESPONSE);
-    response.type = client->request.type;
+    response.kind = LAB_KIND_RESPONSE;
+    response.type = LAB_KEY_EXCHANGE;
     response.request_id = client->request.request_id;
     response.flags = 0;
-    response.payload_len = (uint32_t)response_length;
+    response.payload_len = wrapped_length;
     response.reserved = 0;
 
     lab_encode_header(client->send_buffer, &response);
-    memcpy(client->send_buffer + LAB_HEADER_SIZE,
-           response_text,
-           response_length);
-    client->send_length = LAB_HEADER_SIZE + response_length;
+    client->send_length = LAB_HEADER_SIZE + wrapped_length;
     client->send_completed = 0;
 
-    printf("[request] peer=%s id=%lu type=%s payload=%lu\n",
-           client->peer,
-           (unsigned long)client->request.request_id,
-           lab_request_name(client->request.type),
-           (unsigned long)client->request.payload_len);
+    printf("[key exchange] peer=%s wrapped_key_bytes=%lu\n",
+           client->peer, (unsigned long)wrapped_length);
 
     return post_send(client);
 }
 
+// Получаем зашифрованный внутренний запрос и отправляем зашифрованный ответ
+static int prepare_secure_response(connection *client)
+{
+    lab_header inner_request;
+    lab_header inner_response;
+    lab_header outer_response;
+    DWORD plain_length = 0;
+    DWORD encrypted_length = 0;
+    char response_text[LAB_MAX_PAYLOAD - LAB_HEADER_SIZE - 32u + 1u];
+    size_t response_length;
+    int is_error;
+
+    if (client->crypto.session_key == 0
+        || client->request.flags != 0
+        || client->request.payload_len < 2u * LAB_AES_IV_BYTES) {
+        return 0;
+    }
+
+    // payload пока содержит IV + шифротекст. Расшифровываем на месте
+    if (!lab_crypto_decrypt_message(&client->crypto,
+                                    client->payload,
+                                    client->request.payload_len,
+                                    client->payload,
+                                    sizeof(client->payload),
+                                    &plain_length)) {
+        fprintf(stderr, "[decrypt] peer=%s error=%lu\n",
+                client->peer, (unsigned long)GetLastError());
+        return 0;
+    }
+
+    // В расшифрованных байтах должен находиться полный внутренний запрос
+    if (plain_length < LAB_HEADER_SIZE
+        || !lab_decode_header(&inner_request, client->payload)
+        || inner_request.version != LAB_PROTOCOL_VERSION
+        || inner_request.kind != LAB_KIND_REQUEST
+        || inner_request.type < LAB_GET_OS
+        || inner_request.type > LAB_GET_ACL
+        || inner_request.request_id != client->request.request_id
+        || inner_request.flags != 0
+        || inner_request.reserved != 0
+        || inner_request.payload_len != plain_length - LAB_HEADER_SIZE) {
+        return 0;
+    }
+
+    // Старые функции сбора информации получают обычный запрос и путь
+    if (!lab_build_system_response(inner_request.type,
+                                   client->payload + LAB_HEADER_SIZE,
+                                   inner_request.payload_len,
+                                   response_text,
+                                   sizeof(response_text),
+                                   &is_error)) {
+        is_error = 1;
+        snprintf(response_text, sizeof(response_text),
+                 "status=error\ncode=response_build_failed\n");
+    }
+    response_length = strlen(response_text);
+
+    // Сначала собираем ВНУТРЕННИЙ ответ в начале send_buffer
+    inner_response.version = LAB_PROTOCOL_VERSION;
+    inner_response.kind = (uint8_t)(is_error
+                                    ? LAB_KIND_ERROR
+                                    : LAB_KIND_RESPONSE);
+    inner_response.type = inner_request.type;
+    inner_response.request_id = inner_request.request_id;
+    inner_response.flags = 0;
+    inner_response.payload_len = (uint32_t)response_length;
+    inner_response.reserved = 0;
+
+    lab_encode_header(client->send_buffer, &inner_response);
+    memcpy(client->send_buffer + LAB_HEADER_SIZE,
+           response_text, response_length);
+
+    // Шифруем весь внутренний ответ после места под внешний заголовок
+    if (!lab_crypto_encrypt_message(
+            &client->crypto,
+            client->send_buffer,
+            (DWORD)(LAB_HEADER_SIZE + response_length),
+            client->send_buffer + LAB_HEADER_SIZE,
+            LAB_MAX_PAYLOAD,
+            &encrypted_length)) {
+        fprintf(stderr, "[encrypt] peer=%s error=%lu\n",
+                client->peer, (unsigned long)GetLastError());
+        return 0;
+    }
+
+    // Теперь первые 24 байта send_buffer заменяем ВНЕШНИМ заголовком
+    outer_response.version = LAB_PROTOCOL_VERSION;
+    outer_response.kind = LAB_KIND_RESPONSE;
+    outer_response.type = LAB_SECURE_FRAME;
+    outer_response.request_id = inner_request.request_id;
+    outer_response.flags = 0;
+    outer_response.payload_len = encrypted_length;
+    outer_response.reserved = 0;
+
+    lab_encode_header(client->send_buffer, &outer_response);
+    client->send_length = LAB_HEADER_SIZE + encrypted_length;
+    client->send_completed = 0;
+
+    printf("[request] peer=%s id=%lu type=%s payload=%lu encrypted=yes\n",
+           client->peer,
+           (unsigned long)inner_request.request_id,
+           lab_request_name(inner_request.type),
+           (unsigned long)inner_request.payload_len);
+
+    return post_send(client);
+}
+
+// Выбирает обработчик обмена ключами или защищённого сообщения
+static int prepare_response(connection *client)
+{
+    if (client->request.type == LAB_KEY_EXCHANGE) {
+        return prepare_key_exchange_response(client);
+    }
+
+    if (client->request.type == LAB_SECURE_FRAME) {
+        return prepare_secure_response(client);
+    }
+
+    // Открытый GET_OS/GET_ACL после этого больше не принимаем
+    return 0;
+}
+
+// После завершения WSARecv учитываем число реально принятых байтов
+// Если сообщение ещё неполное, снова вызываем post_receive()
 static int complete_receive(connection *client, DWORD transferred)
 {
     if (client->receive_stage == RECEIVE_HEADER) {
@@ -174,6 +320,8 @@ static int complete_receive(connection *client, DWORD transferred)
     return prepare_response(client);
 }
 
+// После отправки всего ответа возвращаемся к чтению заголовка следующего
+// запроса от того же клиента, не закрывая TCP-соединение
 static int complete_send(connection *client, DWORD transferred)
 {
     client->send_completed += transferred;
@@ -188,6 +336,8 @@ static int complete_send(connection *client, DWORD transferred)
     return post_receive(client);
 }
 
+// Рабочий поток спит в GetQueuedCompletionStatus, пока IOCP не сообщит
+// об окончании операции. completion_key -- указатель на состояние клиента
 static DWORD WINAPI worker_thread(void *parameter)
 {
     (void)parameter;
@@ -232,6 +382,7 @@ static DWORD WINAPI worker_thread(void *parameter)
     return 0;
 }
 
+// Создаём TCP-сокет прослушивания на всех IPv4-интерфейсах машины
 static SOCKET create_listen_socket(const char *port)
 {
     struct addrinfo hints;
@@ -286,6 +437,7 @@ static SOCKET create_listen_socket(const char *port)
     return listen_socket;
 }
 
+// Адрес клиента нужен только для диагностической строки в консоли
 static void set_peer_name(connection *client,
                           const struct sockaddr_in *address)
 {
@@ -299,6 +451,9 @@ static void set_peer_name(connection *client,
              (unsigned int)ntohs(address->sin_port));
 }
 
+// Подготовка WinSock и IOCP, создание worker threads, затем цикл accept()
+// Важно: accept() пока обычный блокирующий; IOCP обрабатывает уже принятые
+// соединения. AcceptEx из примера методички здесь ещё не реализован
 int main(int argc, char **argv)
 {
     const char *port = argc >= 2 ? argv[1] : LAB_DEFAULT_PORT;

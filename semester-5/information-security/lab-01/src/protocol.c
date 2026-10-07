@@ -1,34 +1,33 @@
 #include "protocol.h"
 
-static void write_u16(uint8_t *output, uint16_t value)
-{
-    output[0] = (uint8_t)(value >> 8);
-    output[1] = (uint8_t)value;
+// Числа из нескольких байт передаются старшим байтом вперёд (network order)
+// Так формат не зависит от порядка байтов процессора и выравнивания struct
+static void write_u16(uint8_t *output, uint16_t value) {
+    output[0] = (uint8_t) (value >> 8);
+    output[1] = (uint8_t) value;
 }
 
-static void write_u32(uint8_t *output, uint32_t value)
-{
-    output[0] = (uint8_t)(value >> 24);
-    output[1] = (uint8_t)(value >> 16);
-    output[2] = (uint8_t)(value >> 8);
-    output[3] = (uint8_t)value;
+static void write_u32(uint8_t *output, uint32_t value) {
+    output[0] = (uint8_t) (value >> 24);
+    output[1] = (uint8_t) (value >> 16);
+    output[2] = (uint8_t) (value >> 8);
+    output[3] = (uint8_t) value;
 }
 
-static uint16_t read_u16(const uint8_t *input)
-{
-    return (uint16_t)(((uint16_t)input[0] << 8) | input[1]);
+static uint16_t read_u16(const uint8_t *input) {
+    return (uint16_t) (((uint16_t) input[0] << 8) | input[1]);
 }
 
-static uint32_t read_u32(const uint8_t *input)
-{
-    return ((uint32_t)input[0] << 24)
-         | ((uint32_t)input[1] << 16)
-         | ((uint32_t)input[2] << 8)
-         | (uint32_t)input[3];
+static uint32_t read_u32(const uint8_t *input) {
+    return ((uint32_t) input[0] << 24)
+           | ((uint32_t) input[1] << 16)
+           | ((uint32_t) input[2] << 8)
+           | (uint32_t) input[3];
 }
 
-void lab_encode_header(uint8_t output[LAB_HEADER_SIZE], const lab_header *header)
-{
+// Формат 24 байт: magic[4], version[1], kind[1], type[2],
+// request_id[4], flags[4], payload_len[4], reserved[4]
+void lab_encode_header(uint8_t output[LAB_HEADER_SIZE], const lab_header *header) {
     output[0] = 'B';
     output[1] = 'S';
     output[2] = 'I';
@@ -42,8 +41,9 @@ void lab_encode_header(uint8_t output[LAB_HEADER_SIZE], const lab_header *header
     write_u32(output + 20, header->reserved);
 }
 
-int lab_decode_header(lab_header *header, const uint8_t input[LAB_HEADER_SIZE])
-{
+// Здесь проверяется magic, но остальные ограничения (версия, длина,
+// допустимый kind) проверяются отдельно получателем сообщения
+int lab_decode_header(lab_header *header, const uint8_t input[LAB_HEADER_SIZE]) {
     if (input[0] != 'B' || input[1] != 'S'
         || input[2] != 'I' || input[3] != '1') {
         return 0;
@@ -59,18 +59,32 @@ int lab_decode_header(lab_header *header, const uint8_t input[LAB_HEADER_SIZE])
     return 1;
 }
 
-const char *lab_request_name(uint16_t type)
-{
+// Имя типа нужно только для понятной диагностики, не для передачи по сети
+const char *lab_request_name(uint16_t type) {
     switch (type) {
-    case LAB_GET_OS:
-        return "GET_OS";
-    case LAB_GET_TIME:
-        return "GET_TIME";
-    case LAB_GET_UPTIME:
-        return "GET_UPTIME";
-    case LAB_GET_MEMORY:
-        return "GET_MEMORY";
-    default:
-        return "UNKNOWN";
+        case LAB_GET_OS:
+            return "GET_OS";
+        case LAB_GET_TIME:
+            return "GET_TIME";
+        case LAB_GET_UPTIME:
+            return "GET_UPTIME";
+        case LAB_GET_MEMORY:
+            return "GET_MEMORY";
+
+        case LAB_GET_DRIVES:
+            return "GET_DRIVES";
+        case LAB_GET_DISK_SPACE:
+            return "GET_DISK_SPACE";
+
+        case LAB_GET_OWNER:
+            return "GET_OWNER";
+        case LAB_GET_ACL:
+            return "GET_ACL";
+        case LAB_KEY_EXCHANGE:
+            return "KEY_EXCHANGE";
+        case LAB_SECURE_FRAME:
+            return "SECURE_FRAME";
+        default:
+            return "UNKNOWN";
     }
 }
