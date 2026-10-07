@@ -84,9 +84,18 @@ void MyString::swap(MyString& other) {
     other.capacity_=old_capacity;
 }
 // 12 (const char* source)
-MyString &MyString::operator=(const char *source) {
+MyString& MyString::operator=(const char* source) {
     MyString temp(source);
-    swap(temp);
+
+    if (capacity_ >= temp.size_ + 1) {
+        for (int i = 0; i <= temp.size_; ++i) {
+            data_[i] = temp.data_[i];
+        }
+        size_ = temp.size_;
+    } else {
+        swap(temp);
+    }
+
     return *this;
 }
 

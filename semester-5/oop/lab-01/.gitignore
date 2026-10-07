@@ -1,0 +1,24 @@
+# IDE and build output
+.idea/
+cmake-build-*/
+build/
+build-*/
+CMakeFiles/
+CMakeCache.txt
+*.obj
+*.o
+*.exe
+
+# Compiled Python modules and runtime files
+*.pyd
+*.dll
+*.so
+*.dylib
+__pycache__/
+*.pyc
+.venv/
+
+# Intermediate LLVM files and Office lock files
+*.ll
+*.bc
+~$*

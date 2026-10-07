@@ -1,161 +1,212 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mxfile host="app.diagrams.net">
-  <diagram name="Страница-1" id="mystring-decomposition">
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="1. Основная цепочка" id="mystring-1">
     <mxGraphModel dx="1099" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" value="Граф вызовов методов MyString" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="55" y="35" width="710" height="35" as="geometry" />
+        <mxCell id="title" value="Декомпозиция MyString: изменение строки" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="45" y="35" width="750" height="38" as="geometry" />
         </mxCell>
-        <mxCell id="note" value="Основные связи; похожие перегрузки объединены в один блок." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="55" y="75" width="710" height="28" as="geometry" />
+        <mxCell id="note" value="Стрелки показывают основные вызовы. Сходные перегрузки объединены в блоки." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="45" y="80" width="750" height="46" as="geometry" />
         </mxCell>
-        <mxCell id="heading1" value="Изменение строки" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="55" y="112" width="710" height="30" as="geometry" />
+        <mxCell id="under" value="В insert_chars выполняются new char[], копирование трёх частей и delete[] старого буфера." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="90" y="795" width="650" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="replace" value="replace(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="155" width="155" height="48" as="geometry" />
+        <mxCell id="honest" value="Отдельных функций memcopy и Make Room в коде нет. Их действия находятся внутри insert_chars." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="90" y="915" width="650" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="erase" value="erase(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="255" y="155" width="155" height="48" as="geometry" />
+        <mxCell id="replace" value="replace(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="155" width="220" height="62" as="geometry" />
         </mxCell>
-        <mxCell id="operators" value="operator+ / operator+=" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="235" width="155" height="48" as="geometry" />
+        <mxCell id="plus" value="operator+ / operator+=" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="155" width="220" height="62" as="geometry" />
         </mxCell>
-        <mxCell id="append" value="append(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="255" y="235" width="155" height="48" as="geometry" />
+        <mxCell id="append" value="append(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="315" width="220" height="62" as="geometry" />
         </mxCell>
-        <mxCell id="insert" value="insert(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="455" y="235" width="155" height="48" as="geometry" />
+        <mxCell id="erase" value="erase(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="475" width="220" height="62" as="geometry" />
         </mxCell>
-        <mxCell id="chars" value="insert_chars(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="655" y="235" width="125" height="48" as="geometry" />
+        <mxCell id="insert" value="insert(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="475" width="220" height="62" as="geometry" />
         </mxCell>
-        <mxCell id="prefix_public" value="insert(..., count)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="330" width="155" height="48" as="geometry" />
+        <mxCell id="chars" value="insert_chars(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="635" width="220" height="62" as="geometry" />
         </mxCell>
-        <mxCell id="prefix" value="insert_prefix(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="255" y="330" width="155" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="slice_public" value="insert(..., s_index, count)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="420" width="155" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="slice" value="insert_slice(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="255" y="420" width="155" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="replace" target="erase">
+        <mxCell id="edge-1" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="replace" target="erase">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="replace" target="insert">
+        <mxCell id="edge-2" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="replace" target="insert">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="operators" target="append">
+        <mxCell id="edge-3" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="plus" target="append">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="append" target="insert">
+        <mxCell id="edge-4" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="append" target="insert">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="insert" target="chars">
+        <mxCell id="edge-5" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="insert" target="chars">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="prefix_public" target="prefix">
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2. Варианты insert" id="mystring-2">
+    <mxGraphModel dx="1099" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Декомпозиция перегрузок insert" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="45" y="35" width="750" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="Три типа источника (const char*, std::string, MyString) используют одни и те же помощники." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="45" y="80" width="750" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="slice_note" value="insert_slice проверяет начальный индекс в источнике." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="555" y="525" width="225" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="prefix_note" value="insert_prefix ограничивает count длиной источника." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="555" y="625" width="225" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="chars_note" value="insert_chars — одна общая реализация вставки и работы с буфером." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="170" y="865" width="500" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="basic" value="insert(index, source) / insert(index, count, ch)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="165" width="215" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="prefix_call" value="insert(index, source, count)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="305" y="165" width="215" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="slice_call" value="insert(index, source, s_index, count)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="555" y="165" width="215" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="slice" value="insert_slice(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="555" y="345" width="215" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="prefix" value="insert_prefix(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="305" y="505" width="215" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="chars" value="insert_chars(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="305" y="705" width="215" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="basic" target="chars">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="475" />
+              <mxPoint x="160" y="739" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-2" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="prefix_call" target="prefix">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="prefix" target="chars">
+        <mxCell id="edge-3" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="slice_call" target="slice">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="slice_public" target="slice">
+        <mxCell id="edge-4" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="slice" target="prefix">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="slice" target="prefix">
+        <mxCell id="edge-5" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="prefix" target="chars">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="heading2" value="Получение подстроки" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="55" y="510" width="710" height="30" as="geometry" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="3. Остальные методы" id="mystring-3">
+    <mxGraphModel dx="1099" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Другие общие функции MyString" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="45" y="35" width="750" height="38" as="geometry" />
         </mxCell>
-        <mxCell id="substr1" value="substr(index)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="550" width="170" height="48" as="geometry" />
+        <mxCell id="note" value="Основные прямые вызовы; варианты с разными типами аргументов сгруппированы." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="45" y="80" width="750" height="46" as="geometry" />
         </mxCell>
-        <mxCell id="substr2" value="substr(index, count)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="285" y="550" width="180" height="48" as="geometry" />
+        <mxCell id="conditional" value="Вызов swap возможен только в ветке, где старого буфера не хватает." style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="425" y="610" width="175" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="substr_ctor" value="MyString(const char*, count)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="525" y="550" width="255" height="48" as="geometry" />
+        <mxCell id="find1" value="find(source)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="35" y="165" width="170" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="substr1" target="substr2">
+        <mxCell id="find2" value="find(source, index)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="35" y="335" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="find_core" value="find_chars(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="35" y="505" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cmp_ops" value="==  !=  &lt;  &lt;=  &gt;  &gt;=" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="165" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="compare" value="compare(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="335" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="index" value="operator[] const" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="505" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="check" value="check_index(...)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="675" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="assign_other" value="operator=(MyString / std::string / char)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="425" y="165" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="assign_c" value="operator=(const char*)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="425" y="335" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="swap" value="swap(...) при нехватке места" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="425" y="505" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="substr1" value="substr(index)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="165" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="substr2" value="substr(index, count)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="335" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="substr_ctor" value="MyString(const char*, count)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="505" width="170" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="copy_ctor" value="MyString(const MyString&amp;)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="870" width="200" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="std_ctor" value="MyString(std::string)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="475" y="870" width="200" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="c_ctor" value="MyString(const char*)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=15;align=center;verticalAlign=middle;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="312" y="1010" width="200" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="find1" target="find2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="substr2" target="substr_ctor">
+        <mxCell id="edge-2" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="find2" target="find_core">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="heading3" value="Сравнение и индекс" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="55" y="635" width="710" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="compare_ops" value="==  !=  &amp;lt;  &amp;lt;=  &amp;gt;  &amp;gt;=" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="675" width="155" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="compare" value="compare(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="255" y="675" width="155" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="index" value="operator[]" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="455" y="675" width="155" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="check" value="check_index(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="655" y="675" width="125" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="e12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="compare_ops" target="compare">
+        <mxCell id="edge-3" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="cmp_ops" target="compare">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="compare" target="index">
+        <mxCell id="edge-4" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="compare" target="index">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="index" target="check">
+        <mxCell id="edge-5" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="index" target="check">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="heading4" value="Поиск" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="55" y="765" width="710" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="find1" value="find(source)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="805" width="170" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="find2" value="find(source, index)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="285" y="805" width="180" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="find_chars" value="find_chars(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="525" y="805" width="255" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="e15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="find1" target="find2">
+        <mxCell id="edge-6" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="assign_other" target="assign_c">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="find2" target="find_chars">
+        <mxCell id="edge-7" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="assign_c" target="swap">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="heading5" value="Присваивание и создание" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="55" y="895" width="710" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="assign1" value="operator=(MyString / string / char)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="935" width="205" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="assign2" value="operator=(const char*)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="315" y="935" width="205" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="swap" value="swap(...)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="575" y="935" width="205" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="e17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="assign1" target="assign2">
+        <mxCell id="edge-8" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="substr1" target="substr2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="assign2" target="swap">
+        <mxCell id="edge-9" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="substr2" target="substr_ctor">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ctors1" value="Конструктор копирования / std::string" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="55" y="1040" width="270" height="48" as="geometry" />
+        <mxCell id="edge-10" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="copy_ctor" target="c_ctor">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ctors2" value="MyString(const char*)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="415" y="1040" width="225" height="48" as="geometry" />
-        </mxCell>
-        <mxCell id="e19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ctors1" target="ctors2">
+        <mxCell id="edge-11" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;" edge="1" parent="1" source="std_ctor" target="c_ctor">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
