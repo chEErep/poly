@@ -1,0 +1,3 @@
+# Сохранить байты входного примера при клонировании с core.autocrlf=true.
+input.txt text eol=lf
+*.exe binary
