@@ -29,7 +29,7 @@ if (-not (Get-SmbShare -Name $shareName -ErrorAction SilentlyContinue)) {
 New-Item -ItemType Directory -Path $Destination -Force | Out-Null
 Set-Content -LiteralPath $marker -Value 'BSIT Lab 2 demo directory' -Encoding ASCII
 Copy-Item -LiteralPath (Join-Path $packageDirectory 'backup_service.exe') -Destination $Destination -Force
-Copy-Item -LiteralPath (Join-Path $packageDirectory 'FIRST_SHOW.md') -Destination $Destination -Force
+Copy-Item -LiteralPath (Join-Path $packageDirectory 'README.md') -Destination $Destination -Force
 Copy-Item -LiteralPath (Join-Path $packageDirectory 'verify-service.ps1') -Destination $Destination -Force
 Copy-Item -LiteralPath (Join-Path $packageDirectory 'verify-complete.ps1') -Destination $Destination -Force
 
@@ -77,4 +77,4 @@ if (-not (Test-Path -LiteralPath ($uncRoot + '\source'))) {
 Write-Host "Prepared: $Destination"
 Write-Host "Next: cd $Destination"
 Write-Host '.\backup_service.exe once'
-Write-Host 'For the service demo, follow FIRST_SHOW.md. The service is not installed yet.'
+Write-Host 'For service commands, see README.md. The service is not installed yet.'

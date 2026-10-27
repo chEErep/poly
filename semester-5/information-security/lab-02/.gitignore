@@ -2,5 +2,10 @@
 /dist/
 /test-results/
 /report/
+/DEFENSE.md
+/DEFENSE_SPEECH.md
+/FIRST_SHOW.md
+/VERIFICATION.md
+/порядок_демонстрации.txt
 *.log
 *.tmp

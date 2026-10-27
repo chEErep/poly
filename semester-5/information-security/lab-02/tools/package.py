@@ -1,4 +1,4 @@
-"""Prepare a self-contained Windows 10 classroom demo, with no build tools required."""
+"""Package the Windows service, configuration, README and integration utilities."""
 from pathlib import Path
 import hashlib
 import json
@@ -13,15 +13,17 @@ files = {
     "backup_service.exe": build / "backup_service.exe",
     "demo.exe": build / "demo.exe",
     "backup.ini": project / "backup.ini",
-    "FIRST_SHOW.md": project / "FIRST_SHOW.md",
-    "DEFENSE.md": project / "DEFENSE.md",
-    "DEFENSE_SPEECH.md": project / "DEFENSE_SPEECH.md",
+    "README.md": project / "README.md",
     "setup-demo.ps1": project / "scripts/setup-demo.ps1",
     "verify-service.ps1": project / "scripts/verify-service.ps1",
     "verify-complete.ps1": project / "scripts/verify-complete.ps1",
     "update-demo.ps1": project / "scripts/update-demo.ps1",
     "MINIZ-LICENSE.txt": project / "third_party/miniz/LICENSE",
 }
+# Remove study notes left by earlier versions of the package.
+for directory in (output, output.parent / "Stage1"):
+    for name in ("FIRST_SHOW.md", "DEFENSE.md", "DEFENSE_SPEECH.md"):
+        (directory / name).unlink(missing_ok=True)
 for name, source in files.items():
     if source.suffix == ".ps1":
         # Windows PowerShell 5.1 needs a BOM for Russian literals in UTF-8 scripts.
@@ -45,7 +47,7 @@ bundle = output.parent / "Lab2.zip"
 with zipfile.ZipFile(bundle, "w", zipfile.ZIP_DEFLATED) as archive:
     for name in [*names, "SHA256SUMS.json"]:
         archive.write(output / name, "Lab2/" + name)
-print("Demo package: dist/Lab2 and dist/Lab2.zip")
+print("Package: dist/Lab2 and dist/Lab2.zip")
 
 # Старая общая папка VirtualBox продолжает открывать актуальную версию.
 compatibility = output.parent / "Stage1"

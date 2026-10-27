@@ -1,13 +1,11 @@
-# Лабораторная работа № 2 — служба резервного копирования Windows
+# Служба резервного копирования Windows
 
-Учебная программа на **C11 и WinAPI**, которая работает как служба Windows:
+Программа на **C11 и WinAPI**, которая работает как служба Windows:
 выбирает файлы по маскам, создаёт ZIP и автоматически обновляет его при изменениях
 в исходной папке. Архиватор miniz встроен в программу; внешний процесс для сжатия
 не запускается.
 
-[Условие лабораторной работы (PDF)](<БСИТ. Лабораторная 2.pdf>) ·
-[Сценарий демонстрации](FIRST_SHOW.md) ·
-[Теория и ответы для защиты](DEFENSE_SPEECH.md)
+[Условие лабораторной работы (PDF)](<БСИТ. Лабораторная 2.pdf>)
 
 ## Возможности
 
@@ -65,7 +63,7 @@ python tests/cli_smoke.py dist/Lab2
 ```
 
 Результат: `dist/Lab2/` и `dist/Lab2.zip`. Пакет содержит службу, тестовую программу,
-пример DOCX, настройки, инструкции и PowerShell-сценарии. В Windows, где запускается
+пример DOCX, настройки, README и PowerShell-сценарии. В Windows, где запускается
 готовый пакет, компилятор и внешний архиватор не нужны.
 
 Для MinGW рекомендуется путь к рабочей копии без кириллицы. Альтернативный сценарий
@@ -76,44 +74,40 @@ CLion и Python передаются явно; например, при соот
 .\build.ps1 -ClionDirectory 'C:\Program Files\JetBrains\CLion' -PythonPath 'C:\Python313\python.exe'
 ```
 
-`dist/Stage1` и `dist/Lab2-Stage1.zip` создаются как совместимые копии актуального
-пакета для старой общей папки VirtualBox. Основной пакет — `dist/Lab2`.
-
 ## Быстрый запуск в Windows 10
 
-1. Собрать пакет и скопировать содержимое `dist/Lab2` в виртуальную машину,
-   например в `C:\Lab2Package`.
-2. Открыть PowerShell **от имени администратора** и подготовить тестовую папку:
+После сборки открыть PowerShell **от имени администратора** в каталоге проекта.
+Создать папки источника и архива, скопировать программу и конфигурацию:
 
-   ```powershell
-   cd C:\Lab2Package
-   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\setup-demo.ps1
-   cd C:\BSITLab2
-   ```
+```powershell
+New-Item -ItemType Directory -Path C:\BSITLab2\source, C:\BSITLab2\backup -Force | Out-Null
+Copy-Item .\dist\Lab2\backup_service.exe C:\BSITLab2
+Copy-Item .\backup.ini C:\BSITLab2
+Set-Content C:\BSITLab2\source\example.txt 'Первый файл' -Encoding UTF8
+cd C:\BSITLab2
+```
 
-   Скрипт создаёт источник с тремя уровнями вложенности, папку для ZIP и конфигурацию.
-   На каждом из четырёх уровней находятся TXT, DOCX и EXE; из исходного набора под
-   настроенные маски попадают 12 файлов. Служба пока не установлена.
+Установить и запустить службу:
 
-3. Установить и запустить службу:
+```powershell
+.\backup_service.exe install
+.\backup_service.exe start
+Get-Content .\backup.log -Tail 10
+```
 
-   ```powershell
-   .\backup_service.exe install
-   .\backup_service.exe start
-   Get-Content .\backup.log -Tail 10
-   ```
+Строка `Backup ready` в журнале подтверждает создание
+`C:\BSITLab2\backup\backup.zip`. При изменении выбранного файла или добавлении
+нового файла служба обновит архив и запишет `Backup updated`. Для проверки можно
+изменить `source\example.txt`, дождаться обновления и открыть ZIP.
+Если просмотрщик удерживает ZIP и мешает замене, закрыть его:
+служба повторит попытку автоматически.
 
-4. Дождаться строки `Backup ready: 12 files.` в журнале и открыть
-   `C:\BSITLab2\backup\backup.zip`. Изменить выбранный TXT или добавить новый TXT
-   во вложенную папку. После строки `Backup updated` заново открыть архив и проверить
-   новое содержимое. Если просмотрщик удерживает ZIP и мешает замене, закрыть его:
-   служба повторит попытку автоматически.
-5. По завершении остановить службу и удалить её регистрацию:
+Для остановки и удаления регистрации:
 
-   ```powershell
-   .\backup_service.exe stop
-   .\backup_service.exe remove
-   ```
+```powershell
+.\backup_service.exe stop
+.\backup_service.exe remove
+```
 
 Для примера с `\\localhost\C$` нужны работающая служба Windows `Server`
 (`LanmanServer`), доступный административный ресурс `C$` и соответствующие права.
@@ -187,7 +181,7 @@ interval_seconds=2
 | `src/common.c`, `src/app.h` | Пути, журнал, ошибки и общие объявления |
 | `samples/demo.c` | Тестовая программа с окном для проверки извлечённого EXE |
 | `tests/` | Проверки конфигурации, масок, ZIP и автоматического обновления |
-| `scripts/` | Подготовка демонстрации и проверка настоящей службы |
+| `scripts/` | Создание тестового набора файлов и проверка службы |
 | `tools/package.py` | Сборка демонстрационного пакета и SHA-256-манифеста |
 | `third_party/miniz/` | Исходники встроенной библиотеки архивирования |
 
@@ -203,15 +197,16 @@ CTest проверяет маски и загрузку конфигурации
 блокировки, обновления без изменения длины или времени файла, добавление,
 переименование, удаление и восстановление отсутствующего или повреждённого архива.
 
-Для проверки **настоящей службы** после подготовки демонстрационного каталога
+Для интеграционной проверки **настоящей службы** выполнить из каталога проекта
 в PowerShell администратора:
 
 ```powershell
-cd C:\BSITLab2
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\verify-complete.ps1 -KeepInstalled
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\dist\Lab2\setup-demo.ps1 -Destination C:\BSITLab2-Test
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\BSITLab2-Test\verify-complete.ps1
 ```
 
-Этот сценарий управляет службой `BSITLab2Backup`: проверяет установку, запуск,
+Перед проверкой регистрация `BSITLab2Backup` должна отсутствовать.
+Сценарий создаёт тестовый набор файлов и проверяет установку, запуск,
 содержимое ZIP, автоматические обновления при неизменном PID, повтор после блокировки,
 перезапуск, остановку и удаление. С `-KeepInstalled` в конце оставляет службу
 установленной и работающей. Результаты записываются локально.
@@ -238,6 +233,3 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\verify-complete.ps1 -K
 `77d0dce8627735138c51770d1799a1ef48f2117d`. Версия и контрольные суммы исходников
 сохранены в [upstream.json](third_party/miniz/upstream.json), лицензия —
 в [third_party/miniz/LICENSE](third_party/miniz/LICENSE).
-
-Отчёт, его иллюстрации, локальные журналы, результаты сборки и готовые пакеты
-исключены из Git. PDF с условием включён в репозиторий.
