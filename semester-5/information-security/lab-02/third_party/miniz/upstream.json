@@ -1,0 +1,20 @@
+{
+  "project": "https://github.com/richgel999/miniz",
+  "version": "3.1.2",
+  "commit": "77d0dce8627735138c51770d1799a1ef48f2117d",
+  "files": {
+    "miniz.c": "6a0314b68c9b804f33e27d89aa3144ef7724fd787043ba8c95d1b19be2d64afd",
+    "miniz.h": "f4a1c9924def38eb2da543add6077c90acae3f3e8775d348abc953ff659b5f89",
+    "miniz_common.h": "fa5bf07d72efa51640f9d8ee11431fd2538e6218aea9e9328905edeb54187997",
+    "miniz_tdef.c": "69e4d7c2774708cf695cec4ace4bfb0bc3d00479c615d62fdacbe4a1669239b0",
+    "miniz_tdef.h": "13574142e909c529c3c08bbd76be8ac23939370e08fdc9837e635b2e00b4883d",
+    "miniz_tinfl.c": "457e745d8fef9657b07e4c641548b49f029d54dd70d3fc83568253f51194cda4",
+    "miniz_tinfl.h": "ef18f995b0151095a0e9ed718114bd03437c607b302ee979a9d371f157bacf8a",
+    "miniz_zip.c": "c89273ef53c5ecb5170f18fb3c3e32da0255e5925949866c50a04d136c547ae3",
+    "miniz_zip.h": "eff19da6bcd7e127bb4447bf67a6093a6e589ee496fd251a444ec3b58c1d86f4",
+    "LICENSE": "0115478d567121238cf6cc1c0c361926cf07a49d9e4c9e66da97fac6a01646b3"
+  },
+  "local_files": {
+    "miniz_export.h": "Static export macro for the local CMake build."
+  }
+}

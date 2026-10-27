@@ -1,0 +1,56 @@
+cmake_minimum_required(VERSION 3.20)
+project(bsit_lab2 C)
+
+if(NOT WIN32)
+    message(FATAL_ERROR "This project uses the Windows service API.")
+endif()
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
+
+# miniz работает внутри нашего процесса. Внешний архиватор не запускается.
+add_library(miniz STATIC third_party/miniz/miniz.c
+    third_party/miniz/miniz_tdef.c third_party/miniz/miniz_tinfl.c
+    third_party/miniz/miniz_zip.c)
+target_include_directories(miniz PUBLIC third_party/miniz)
+target_compile_definitions(miniz PUBLIC MINIZ_NO_ZLIB_COMPATIBLE_NAMES)
+
+add_library(backup_core STATIC src/common.c src/backup.c src/monitor.c)
+target_include_directories(backup_core PUBLIC src)
+target_compile_definitions(backup_core PUBLIC UNICODE _UNICODE
+    WIN32_LEAN_AND_MEAN _WIN32_WINNT=0x0601 _CRT_SECURE_NO_WARNINGS)
+target_link_libraries(backup_core PUBLIC miniz)
+
+add_executable(backup_service src/main.c)
+target_link_libraries(backup_service PRIVATE backup_core advapi32)
+add_executable(demo WIN32 samples/demo.c)
+target_link_libraries(demo PRIVATE user32)
+
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(core_tests tests/core_tests.c)
+    target_link_libraries(core_tests PRIVATE backup_core)
+    add_executable(backup_probe tests/backup_probe.c)
+    target_link_libraries(backup_probe PRIVATE backup_core)
+    add_test(NAME core_tests COMMAND core_tests)
+endif()
+
+set(our_targets backup_core backup_service demo)
+if(BUILD_TESTING)
+    list(APPEND our_targets core_tests backup_probe)
+endif()
+foreach(target IN LISTS our_targets)
+    if(MSVC)
+        target_compile_options(${target} PRIVATE /W4 /utf-8)
+    else()
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic)
+        target_link_options(${target} PRIVATE -static)
+    endif()
+endforeach()
+if(MINGW)
+    target_link_options(backup_service PRIVATE -municode)
+    if(BUILD_TESTING)
+        target_link_options(core_tests PRIVATE -municode)
+        target_link_options(backup_probe PRIVATE -municode)
+    endif()
+endif()

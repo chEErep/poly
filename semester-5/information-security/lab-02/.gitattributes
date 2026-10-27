@@ -1,0 +1,2 @@
+# Preserve the vendored source bytes recorded in upstream.json.
+third_party/miniz/* -text
