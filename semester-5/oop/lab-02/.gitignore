@@ -1,0 +1,10 @@
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+~$*.docx
+
+# Local study notes and reference material
+ПОДГОТОВКА_К_ЛАБЕ.md
+materials/UML.pdf
+report/unit-tests.txt

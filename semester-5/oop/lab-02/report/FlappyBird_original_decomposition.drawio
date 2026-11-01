@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="1. Функционал исходной игры" id="original-functionality">
+    <mxGraphModel dx="1200" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1150" pageHeight="1370" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Декомпозиция функционала исходной игры" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=26;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="20" width="1100" height="45" />
+        </mxCell>
+        <mxCell id="note" value="Исходный flappy.py до рефакторинга. Стрелки показывают части функционала, а не вызовы." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="75" width="1100" height="45" />
+        </mxCell>
+        <mxCell id="root" value="Игра Flappy Bird&#10;Python и Pygame" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=23;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="375" y="145" width="400" height="70" />
+        </mxCell>
+        <mxCell id="prepare" value="Подготовка игры&#10;main(), getHitmask()&#10;&#10;Создание окна; загрузка изображений&#10;и звуков; выбор оформления;&#10;построение масок прозрачности." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="305" width="440" height="190" />
+        </mxCell>
+        <mxCell id="part-prepare" value="" edge="1" parent="1" source="root" target="prepare" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="30" y="180" />
+              <mxPoint x="30" y="400.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="welcome" value="Экран ожидания&#10;showWelcomeAnimation(), playerShm()&#10;&#10;Ожидание начала; покачивание птицы;&#10;анимация крыльев; прокрутка земли;&#10;вывод подсказки." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="645" y="305" width="440" height="190" />
+        </mxCell>
+        <mxCell id="part-welcome" value="" edge="1" parent="1" source="root" target="welcome" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=1;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1120" y="180" />
+              <mxPoint x="1120" y="400.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="playing" value="Игровая попытка&#10;mainGame(), getRandomPipe()&#10;&#10;Обработка клавиш и взмаха; полёт;&#10;создание, движение и удаление труб;&#10;начисление очков; прокрутка земли." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="645" width="440" height="210" />
+        </mxCell>
+        <mxCell id="part-playing" value="" edge="1" parent="1" source="root" target="playing" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="30" y="180" />
+              <mxPoint x="30" y="750.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="collision" value="Проверка столкновений&#10;checkCrash(), pixelCollision()&#10;&#10;Проверка касания земли;&#10;пересечение прямоугольников;&#10;сравнение масок видимых пикселей." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="645" y="645" width="440" height="210" />
+        </mxCell>
+        <mxCell id="part-collision" value="" edge="1" parent="1" source="root" target="collision" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=1;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1120" y="180" />
+              <mxPoint x="1120" y="750.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="drawing" value="Вывод изображения&#10;showScore() и циклы трёх экранов&#10;&#10;Фон, трубы, земля, птица;&#10;поворот птицы; цифры счёта;&#10;надписи начала и проигрыша." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="1015" width="440" height="190" />
+        </mxCell>
+        <mxCell id="part-drawing" value="" edge="1" parent="1" source="root" target="drawing" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="30" y="180" />
+              <mxPoint x="30" y="1110.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gameover" value="Проигрыш и повтор&#10;showGameOverScreen()&#10;&#10;Звуки столкновения; падение птицы;&#10;экран Game Over; ожидание повтора&#10;после приземления." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="645" y="1015" width="440" height="190" />
+        </mxCell>
+        <mxCell id="part-gameover" value="" edge="1" parent="1" source="root" target="gameover" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=1;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1120" y="180" />
+              <mxPoint x="1120" y="1110.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="footer" value="Движение, ввод и основная отрисовка находятся внутри больших экранных функций.&#10;Отдельных функций flap(), update() или draw() в исходном проекте нет." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="45" y="1260" width="1060" height="75" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2. Реальные вызовы функций" id="original-calls">
+    <mxGraphModel dx="1200" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1120" pageHeight="1370" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Граф вызовов функций исходного Flappy Bird" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=25;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="20" width="1060" height="45" />
+        </mxCell>
+        <mxCell id="note" value="Стрелка: вызывающая функция → вызываемая. Библиотечные вызовы не показаны." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="70" width="1060" height="35" />
+        </mxCell>
+        <mxCell id="screens-label" value="Управление экранами из main()" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="125" width="1060" height="30" />
+        </mxCell>
+        <mxCell id="main-screens" value="main()" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="main">
+          <mxGeometry as="geometry" x="35" y="225" width="240" height="50" />
+        </mxCell>
+        <mxCell id="welcome-screen" value="showWelcomeAnimation()" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="showWelcomeAnimation">
+          <mxGeometry as="geometry" x="425" y="160" width="420" height="50" />
+        </mxCell>
+        <mxCell id="playing-screen" value="mainGame(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="mainGame">
+          <mxGeometry as="geometry" x="425" y="225" width="420" height="50" />
+        </mxCell>
+        <mxCell id="over-screen" value="showGameOverScreen(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="showGameOverScreen">
+          <mxGeometry as="geometry" x="425" y="290" width="420" height="50" />
+        </mxCell>
+        <mxCell id="screen-0" value="" edge="1" parent="1" source="main-screens" target="welcome-screen" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="340" y="250" />
+              <mxPoint x="340" y="185" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="screen-1" value="" edge="1" parent="1" source="main-screens" target="playing-screen" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="340" y="250" />
+              <mxPoint x="340" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="screen-2" value="" edge="1" parent="1" source="main-screens" target="over-screen" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="340" y="250" />
+              <mxPoint x="340" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mask-label" value="Построение масок после загрузки изображений" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="385" width="1060" height="30" />
+        </mxCell>
+        <mxCell id="main-masks" value="main()" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="main">
+          <mxGeometry as="geometry" x="35" y="430" width="240" height="50" />
+        </mxCell>
+        <mxCell id="masks" value="getHitmask(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="getHitmask">
+          <mxGeometry as="geometry" x="425" y="430" width="420" height="50" />
+        </mxCell>
+        <mxCell id="main-mask" value="" edge="1" parent="1" source="main-masks" target="masks" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="welcome-label" value="Покачивание птицы на заставке" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="535" width="1060" height="30" />
+        </mxCell>
+        <mxCell id="welcome" value="showWelcomeAnimation()" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="showWelcomeAnimation">
+          <mxGeometry as="geometry" x="35" y="580" width="420" height="50" />
+        </mxCell>
+        <mxCell id="shm" value="playerShm(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="playerShm">
+          <mxGeometry as="geometry" x="680" y="580" width="370" height="50" />
+        </mxCell>
+        <mxCell id="welcome-shm" value="" edge="1" parent="1" source="welcome" target="shm" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="playing-label" value="Функции, вызываемые во время попытки" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="690" width="1060" height="30" />
+        </mxCell>
+        <mxCell id="playing" value="mainGame(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="mainGame">
+          <mxGeometry as="geometry" x="35" y="805" width="260" height="50" />
+        </mxCell>
+        <mxCell id="random-pipe" value="getRandomPipe()" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="getRandomPipe">
+          <mxGeometry as="geometry" x="425" y="740" width="280" height="50" />
+        </mxCell>
+        <mxCell id="crash" value="checkCrash(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="checkCrash">
+          <mxGeometry as="geometry" x="425" y="805" width="280" height="50" />
+        </mxCell>
+        <mxCell id="score-playing" value="showScore(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="showScore">
+          <mxGeometry as="geometry" x="425" y="870" width="280" height="50" />
+        </mxCell>
+        <mxCell id="pixels" value="pixelCollision(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="pixelCollision">
+          <mxGeometry as="geometry" x="780" y="805" width="300" height="50" />
+        </mxCell>
+        <mxCell id="playing-0" value="" edge="1" parent="1" source="playing" target="random-pipe" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="355" y="830" />
+              <mxPoint x="355" y="765" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="playing-1" value="" edge="1" parent="1" source="playing" target="crash" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="355" y="830" />
+              <mxPoint x="355" y="830" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="playing-2" value="" edge="1" parent="1" source="playing" target="score-playing" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="355" y="830" />
+              <mxPoint x="355" y="895" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="crash-pixels" value="" edge="1" parent="1" source="crash" target="pixels" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="over-label" value="Вывод счёта после проигрыша" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="990" width="1060" height="30" />
+        </mxCell>
+        <mxCell id="over" value="showGameOverScreen(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="showGameOverScreen">
+          <mxGeometry as="geometry" x="35" y="1035" width="420" height="50" />
+        </mxCell>
+        <mxCell id="score-over" value="showScore(...)" style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;fontSize=20;align=center;verticalAlign=middle;spacing=7;" vertex="1" parent="1" sourceFunction="showScore">
+          <mxGeometry as="geometry" x="680" y="1035" width="370" height="50" />
+        </mxCell>
+        <mxCell id="over-score" value="" edge="1" parent="1" source="over" target="score-over" style="html=0;rounded=0;edgeStyle=none;strokeColor=#000000;strokeWidth=1.2;startArrow=none;endArrow=classic;endFill=1;endSize=9;fontFamily=Arial;fontSize=16;labelBackgroundColor=#FFFFFF;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="notes" value="main() вызывает три экрана по очереди в своём цикле. Они не вызывают друг друга напрямую.&#10;Повторяющиеся блоки обозначают одну и ту же функцию. Каждая стрелка — отдельная пара&#10;«вызывающий — вызываемый», даже если в коде имеется несколько мест этого вызова." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="35" y="1140" width="1050" height="115" />
+        </mxCell>
+        <mxCell id="source" value="Источник: FlappyBird_test/FlapPyBird-original/flappy.py&#10;10 функций; 10 различных связей вызовов между ними. Проверено по AST исходного файла." style="html=0;whiteSpace=wrap;rounded=0;shadow=0;strokeWidth=1;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=17;align=left;verticalAlign=middle;spacing=7;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="35" y="1280" width="1050" height="65" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

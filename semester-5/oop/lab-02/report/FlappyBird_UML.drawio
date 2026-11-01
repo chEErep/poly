@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram name="1. Игровая модель" id="solid-model">
+    <mxGraphModel dx="1640" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1640" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Bird" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="110" width="380" height="390" />
+        </mxCell>
+        <mxCell id="Bird-name" value="Bird" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="Bird">
+          <mxGeometry as="geometry" x="0" y="0" width="380" height="42" />
+        </mxCell>
+        <mxCell id="Bird-attrs" value="- x: float&#10;- y: float&#10;- velocity_y: float&#10;- angle: float&#10;- frame_index: int" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="Bird">
+          <mxGeometry as="geometry" x="0" y="42" width="380" height="136" />
+        </mxCell>
+        <mxCell id="Bird-methods" value="+ start_flight(): None&#10;+ flap(): bool&#10;+ update(): None&#10;+ update_idle(): None&#10;+ update_fall(): None&#10;+ get_rect(): RectData&#10;+ get_angle(): float&#10;+ get_frame(): int" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="Bird">
+          <mxGeometry as="geometry" x="0" y="178" width="380" height="212" />
+        </mxCell>
+        <mxCell id="Game" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="590" y="110" width="460" height="500" />
+        </mxCell>
+        <mxCell id="Game-name" value="Game" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="Game">
+          <mxGeometry as="geometry" x="0" y="0" width="460" height="42" />
+        </mxCell>
+        <mxCell id="Game-attrs" value="- bird: Bird&#10;- ground: Ground&#10;- pipes: list[PipePair]&#10;- input_handler: IInputHandler&#10;- renderer: IRenderer&#10;- sound_player: ISoundPlayer&#10;- collision_detector: CollisionDetector&#10;- state: str&#10;- score: int&#10;- theme: Theme" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="Game">
+          <mxGeometry as="geometry" x="0" y="42" width="460" height="256" />
+        </mxCell>
+        <mxCell id="Game-methods" value="+ run(): None&#10;+ handle_command(): None&#10;+ new_round(): None&#10;+ start_game(): None&#10;+ update(): None&#10;+ spawn_pipe(): None&#10;+ finish_round(): None" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="Game">
+          <mxGeometry as="geometry" x="0" y="298" width="460" height="202" />
+        </mxCell>
+        <mxCell id="PipePair" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1250" y="110" width="360" height="320" />
+        </mxCell>
+        <mxCell id="PipePair-name" value="PipePair" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="PipePair">
+          <mxGeometry as="geometry" x="0" y="0" width="360" height="42" />
+        </mxCell>
+        <mxCell id="PipePair-attrs" value="- x: float&#10;- gap_y: float&#10;- gap_size: int&#10;- passed: bool" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="PipePair">
+          <mxGeometry as="geometry" x="0" y="42" width="360" height="112" />
+        </mxCell>
+        <mxCell id="PipePair-methods" value="+ update(): None&#10;+ get_upper_rect(): RectData&#10;+ get_lower_rect(): RectData&#10;+ is_offscreen(): bool&#10;+ register_passage(): bool" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="PipePair">
+          <mxGeometry as="geometry" x="0" y="154" width="360" height="166" />
+        </mxCell>
+        <mxCell id="Ground" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="570" width="380" height="245" />
+        </mxCell>
+        <mxCell id="Ground-name" value="Ground" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="Ground">
+          <mxGeometry as="geometry" x="0" y="0" width="380" height="42" />
+        </mxCell>
+        <mxCell id="Ground-attrs" value="- y: float&#10;- offset_x: float&#10;- repeat_width: int" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="Ground">
+          <mxGeometry as="geometry" x="0" y="42" width="380" height="88" />
+        </mxCell>
+        <mxCell id="Ground-methods" value="+ update(): None&#10;+ touches(): bool&#10;+ get_y(): float&#10;+ get_position(): tuple[float, float]" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="Ground">
+          <mxGeometry as="geometry" x="0" y="130" width="380" height="115" />
+        </mxCell>
+        <mxCell id="CollisionDetector" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1250" y="510" width="360" height="205" />
+        </mxCell>
+        <mxCell id="CollisionDetector-name" value="CollisionDetector" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="CollisionDetector">
+          <mxGeometry as="geometry" x="0" y="0" width="360" height="42" />
+        </mxCell>
+        <mxCell id="CollisionDetector-attrs" value="- masks: dict[str, HitMask]" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="CollisionDetector">
+          <mxGeometry as="geometry" x="0" y="42" width="360" height="40" />
+        </mxCell>
+        <mxCell id="CollisionDetector-methods" value="+ check(): str | None&#10;- __pixel_collision(): bool" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="CollisionDetector">
+          <mxGeometry as="geometry" x="0" y="82" width="360" height="123" />
+        </mxCell>
+        <mxCell id="IInputHandler" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="495" y="805" width="330" height="115" />
+        </mxCell>
+        <mxCell id="IInputHandler-name" value="«interface»&#10;IInputHandler" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="IInputHandler">
+          <mxGeometry as="geometry" x="0" y="0" width="330" height="62" />
+        </mxCell>
+        <mxCell id="IInputHandler-methods" value="+ poll(): list[str]" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="IInputHandler">
+          <mxGeometry as="geometry" x="0" y="62" width="330" height="53" />
+        </mxCell>
+        <mxCell id="IRenderer" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="860" y="805" width="330" height="115" />
+        </mxCell>
+        <mxCell id="IRenderer-name" value="«interface»&#10;IRenderer" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="IRenderer">
+          <mxGeometry as="geometry" x="0" y="0" width="330" height="62" />
+        </mxCell>
+        <mxCell id="IRenderer-methods" value="+ draw(): None" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="IRenderer">
+          <mxGeometry as="geometry" x="0" y="62" width="330" height="53" />
+        </mxCell>
+        <mxCell id="ISoundPlayer" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1250" y="805" width="360" height="115" />
+        </mxCell>
+        <mxCell id="ISoundPlayer-name" value="«interface»&#10;ISoundPlayer" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="ISoundPlayer">
+          <mxGeometry as="geometry" x="0" y="0" width="360" height="62" />
+        </mxCell>
+        <mxCell id="ISoundPlayer-methods" value="+ play(): None" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="ISoundPlayer">
+          <mxGeometry as="geometry" x="0" y="62" width="360" height="53" />
+        </mxCell>
+        <mxCell id="game-bird" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.0;exitY=0.26;entryX=1.0;entryY=0.3333333333333333;exitPerimeter=0;entryPerimeter=0;startArrow=diamond;startFill=1;startSize=15;endArrow=none;" edge="1" parent="1" source="Game" target="Bird">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="game-pipes" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=1.0;exitY=0.26;entryX=0.0;entryY=0.40625;exitPerimeter=0;entryPerimeter=0;startArrow=diamond;startFill=1;startSize=15;endArrow=none;" edge="1" parent="1" source="Game" target="PipePair">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="game-ground" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.0;exitY=0.91;entryX=1.0;entryY=0.4489795918367347;exitPerimeter=0;entryPerimeter=0;startArrow=diamond;startFill=1;startSize=15;endArrow=none;" edge="1" parent="1" source="Game" target="Ground">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="480" y="565" />
+              <mxPoint x="480" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="game-collision" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=1.0;exitY=0.83;entryX=0.0;entryY=0.5609756097560976;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=open;endFill=0;endSize=11;" edge="1" parent="1" source="Game" target="CollisionDetector">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1160" y="525" />
+              <mxPoint x="1160" y="625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="game-input" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.15217391304347827;exitY=1.0;entryX=0.5;entryY=0.0;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=open;endFill=0;endSize=11;" edge="1" parent="1" source="Game" target="IInputHandler">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="game-render" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=open;endFill=0;endSize=11;" edge="1" parent="1" source="Game" target="IRenderer">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="820" y="755" />
+              <mxPoint x="1025" y="755" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="game-sound" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=1.0;exitY=0.95;entryX=0.5;entryY=0.0;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=open;endFill=0;endSize=11;" edge="1" parent="1" source="Game" target="ISoundPlayer">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1110" y="585" />
+              <mxPoint x="1110" y="765" />
+              <mxPoint x="1430" y="765" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="title" value="UML диаграмма классов Flappy Bird" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=28;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="12" width="1580" height="37" />
+        </mxCell>
+        <mxCell id="subtitle" value="Реализованная модель и контракты. Основные поля и методы; параметры методов опущены." style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="58" width="1580" height="30" />
+        </mxCell>
+        <mxCell id="game-bird-label" value="1       1" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="455" y="206" width="90" height="28" />
+        </mxCell>
+        <mxCell id="game-pipes-label" value="1      0..*" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1100" y="206" width="90" height="28" />
+        </mxCell>
+        <mxCell id="game-ground-label" value="1" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="425" y="646" width="90" height="28" />
+        </mxCell>
+        <mxCell id="game-collision-label" value="1" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1210" y="590" width="90" height="28" />
+        </mxCell>
+        <mxCell id="game-input-label" value="1" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="677" y="762" width="90" height="28" />
+        </mxCell>
+        <mxCell id="game-render-label" value="1" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1040" y="766" width="90" height="28" />
+        </mxCell>
+        <mxCell id="game-sound-label" value="1" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1450" y="767" width="90" height="28" />
+        </mxCell>
+        <mxCell id="legend" value="Чёрный ромб — композиция. Открытая стрелка — ассоциация. 0..* — коллекция пар труб." style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="940" width="1580" height="24" />
+        </mxCell>
+        <mxCell id="types" value="RectData — координаты и размеры. HitMask — логическая маска. Theme — выбранное оформление." style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=17;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="972" width="1580" height="23" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2. Механизмы реализации" id="solid-services">
+    <mxGraphModel dx="1640" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1640" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="IInputHandler" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="110" width="380" height="115" />
+        </mxCell>
+        <mxCell id="IInputHandler-name" value="«interface»&#10;IInputHandler" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="IInputHandler">
+          <mxGeometry as="geometry" x="0" y="0" width="380" height="62" />
+        </mxCell>
+        <mxCell id="IInputHandler-methods" value="+ poll(): list[str]" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="IInputHandler">
+          <mxGeometry as="geometry" x="0" y="62" width="380" height="53" />
+        </mxCell>
+        <mxCell id="IRenderer" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="610" y="110" width="390" height="115" />
+        </mxCell>
+        <mxCell id="IRenderer-name" value="«interface»&#10;IRenderer" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="IRenderer">
+          <mxGeometry as="geometry" x="0" y="0" width="390" height="62" />
+        </mxCell>
+        <mxCell id="IRenderer-methods" value="+ draw(): None" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="IRenderer">
+          <mxGeometry as="geometry" x="0" y="62" width="390" height="53" />
+        </mxCell>
+        <mxCell id="ISoundPlayer" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1230" y="110" width="380" height="115" />
+        </mxCell>
+        <mxCell id="ISoundPlayer-name" value="«interface»&#10;ISoundPlayer" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="ISoundPlayer">
+          <mxGeometry as="geometry" x="0" y="0" width="380" height="62" />
+        </mxCell>
+        <mxCell id="ISoundPlayer-methods" value="+ play(): None" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="ISoundPlayer">
+          <mxGeometry as="geometry" x="0" y="62" width="380" height="53" />
+        </mxCell>
+        <mxCell id="InputHandler" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="350" width="380" height="180" />
+        </mxCell>
+        <mxCell id="InputHandler-name" value="InputHandler" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="InputHandler">
+          <mxGeometry as="geometry" x="0" y="0" width="380" height="42" />
+        </mxCell>
+        <mxCell id="InputHandler-attrs" value="- key_map: dict[int, str]" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="InputHandler">
+          <mxGeometry as="geometry" x="0" y="42" width="380" height="40" />
+        </mxCell>
+        <mxCell id="InputHandler-methods" value="+ poll(): list[str]" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="InputHandler">
+          <mxGeometry as="geometry" x="0" y="82" width="380" height="98" />
+        </mxCell>
+        <mxCell id="Renderer" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="610" y="350" width="390" height="205" />
+        </mxCell>
+        <mxCell id="Renderer-name" value="Renderer" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="Renderer">
+          <mxGeometry as="geometry" x="0" y="0" width="390" height="42" />
+        </mxCell>
+        <mxCell id="Renderer-attrs" value="- screen: Surface&#10;- assets: AssetManager" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="Renderer">
+          <mxGeometry as="geometry" x="0" y="42" width="390" height="64" />
+        </mxCell>
+        <mxCell id="Renderer-methods" value="+ draw(): None&#10;+ draw_score(): None" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="Renderer">
+          <mxGeometry as="geometry" x="0" y="106" width="390" height="99" />
+        </mxCell>
+        <mxCell id="SoundPlayer" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1230" y="350" width="380" height="180" />
+        </mxCell>
+        <mxCell id="SoundPlayer-name" value="SoundPlayer" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="SoundPlayer">
+          <mxGeometry as="geometry" x="0" y="0" width="380" height="42" />
+        </mxCell>
+        <mxCell id="SoundPlayer-attrs" value="- assets: AssetManager" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="SoundPlayer">
+          <mxGeometry as="geometry" x="0" y="42" width="380" height="40" />
+        </mxCell>
+        <mxCell id="SoundPlayer-methods" value="+ play(): None" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="SoundPlayer">
+          <mxGeometry as="geometry" x="0" y="82" width="380" height="98" />
+        </mxCell>
+        <mxCell id="AssetManager" value="" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;container=1;collapsible=0;recursiveResize=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="610" y="690" width="390" height="260" />
+        </mxCell>
+        <mxCell id="AssetManager-name" value="AssetManager" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=23;fontStyle=1;align=center;" vertex="1" parent="AssetManager">
+          <mxGeometry as="geometry" x="0" y="0" width="390" height="42" />
+        </mxCell>
+        <mxCell id="AssetManager-attrs" value="- images: dict[str, Surface]&#10;- sounds: dict[str, Sound]&#10;- masks: dict[str, HitMask]" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="AssetManager">
+          <mxGeometry as="geometry" x="0" y="42" width="390" height="88" />
+        </mxCell>
+        <mxCell id="AssetManager-methods" value="+ load(): None&#10;+ get_image(): Surface&#10;+ get_sound(): Sound&#10;+ get_mask(): HitMask&#10;+ get_masks(): dict[str, HitMask]" style="rounded=0;html=0;whiteSpace=wrap;strokeColor=#000000;fillColor=#FFFFFF;fontColor=#000000;fontFamily=Arial;strokeWidth=1.2;fontSize=19;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;" vertex="1" parent="AssetManager">
+          <mxGeometry as="geometry" x="0" y="130" width="390" height="130" />
+        </mxCell>
+        <mxCell id="input-realization" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.5;exitY=0.0;entryX=0.5;entryY=1.0;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=block;endFill=0;endSize=16;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="InputHandler" target="IInputHandler">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="renderer-realization" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.5;exitY=0.0;entryX=0.5;entryY=1.0;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=block;endFill=0;endSize=16;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="Renderer" target="IRenderer">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="sound-realization" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.5;exitY=0.0;entryX=0.5;entryY=1.0;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=block;endFill=0;endSize=16;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="SoundPlayer" target="ISoundPlayer">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="renderer-assets" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=open;endFill=0;endSize=11;" edge="1" parent="1" source="Renderer" target="AssetManager">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="sound-assets" style="edgeStyle=none;rounded=0;html=0;strokeColor=#000000;strokeWidth=1.4;exitX=0.0;exitY=0.5555555555555556;entryX=1.0;entryY=0.4807692307692308;exitPerimeter=0;entryPerimeter=0;startArrow=none;endArrow=open;endFill=0;endSize=11;" edge="1" parent="1" source="SoundPlayer" target="AssetManager">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1120" y="450" />
+              <mxPoint x="1120" y="815" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="title" value="UML диаграмма классов Flappy Bird" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=28;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="12" width="1580" height="37" />
+        </mxCell>
+        <mxCell id="subtitle" value="Реализации интерфейсов. Те же 3 интерфейса повторены; всего в проекте 9 конкретных классов." style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="58" width="1580" height="30" />
+        </mxCell>
+        <mxCell id="renderer-assets-label" value="1" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="823" y="649" width="90" height="28" />
+        </mxCell>
+        <mxCell id="sound-assets-label" value="1" style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1020" y="777" width="90" height="28" />
+        </mxCell>
+        <mxCell id="input-note" value="InputHandler выдаёт команды.&#10;Game сам решает их значение&#10;в текущем состоянии игры." style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=20;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="600" width="420" height="100" />
+        </mxCell>
+        <mxCell id="masks-note" value="При запуске AssetManager.get_masks()&#10;передаёт логические данные в&#10;CollisionDetector. Постоянной связи&#10;с загрузчиком у проверки нет." style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=19;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1175" y="670" width="435" height="135" />
+        </mxCell>
+        <mxCell id="legend" value="Пунктир с пустым треугольником — реализация интерфейса. Открытая стрелка — ассоциация." style="html=0;whiteSpace=wrap;strokeColor=none;fillColor=none;fontColor=#000000;fontFamily=Arial;fontSize=18;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="25" y="962" width="1580" height="27" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
