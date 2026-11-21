@@ -1,0 +1,13 @@
+.env
+data/
+__pycache__/
+.pytest_cache/
+*.pyc
+build/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.log
+msg.txt
+*.img

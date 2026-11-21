@@ -11,7 +11,8 @@
 ```text
 poly/
 ├── semester-4/
-└── ...
+│   ├── digital-analytics/
+│   └── operating-systems/
 ├── semester-5/
 │   ├── oop/
 │   ├── information-security/
@@ -19,3 +20,6 @@ poly/
 │   └── cryptography/
 ├── semester-6/
 └── ...
+```
+
+[Работы четвёртого семестра](semester-4) включают классификацию изображений, Telegram-бота, учебное ядро x86 и программы на WinSock.
